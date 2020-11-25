@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03002506256DBBA3001E793E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002505256DBBA3001E793E /* SearchBar.swift */; };
+		031F52B8256C9CBF001BA0B4 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F52B7256C9CBF001BA0B4 /* Storage.swift */; };
 		0333E9E4256822A900F83229 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333E9E3256822A900F83229 /* AppDelegate.swift */; };
 		0333E9E6256822A900F83229 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333E9E5256822A900F83229 /* SceneDelegate.swift */; };
 		0333E9E8256822A900F83229 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333E9E7256822A900F83229 /* ContentView.swift */; };
@@ -15,6 +17,23 @@
 		0333E9F0256822AB00F83229 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0333E9EE256822AB00F83229 /* LaunchScreen.storyboard */; };
 		0333E9FB256822AB00F83229 /* Felipe_s_CartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333E9FA256822AB00F83229 /* Felipe_s_CartTests.swift */; };
 		0333EA06256822AB00F83229 /* Felipe_s_CartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333EA05256822AB00F83229 /* Felipe_s_CartUITests.swift */; };
+		0341B5DA256825AB00B50558 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 0341B5D9256825AB00B50558 /* Moya */; };
+		0341B5DC256825AB00B50558 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0341B5DB256825AB00B50558 /* ReactiveMoya */; };
+		0341B5DE256825AB00B50558 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0341B5DD256825AB00B50558 /* RxMoya */; };
+		0341B5EA2568261900B50558 /* RSRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B5E92568261900B50558 /* RSRequest.swift */; };
+		0341B5F125682B3C00B50558 /* ListScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B5F025682B3C00B50558 /* ListScreenController.swift */; };
+		0341B5F925682CA200B50558 /* RSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B5F825682CA200B50558 /* RSService.swift */; };
+		0341B600256A14F100B50558 /* DetailsScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B5FF256A14F100B50558 /* DetailsScreenController.swift */; };
+		0341B608256A168000B50558 /* DetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B607256A168000B50558 /* DetailsScreen.swift */; };
+		0341B60E256A1CE000B50558 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B60D256A1CE000B50558 /* LazyView.swift */; };
+		0341B617256A22EC00B50558 /* DataRequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B616256A22EC00B50558 /* DataRequestStatus.swift */; };
+		0341B61F256A253500B50558 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B61E256A253500B50558 /* Errors.swift */; };
+		0341B625256A285E00B50558 /* MoyaErrorToCustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341B624256A285E00B50558 /* MoyaErrorToCustomError.swift */; };
+		0385C014256B1AC100ED2F91 /* RSListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385C013256B1AC100ED2F91 /* RSListData.swift */; };
+		0385C019256B1D2A00ED2F91 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385C018256B1D2A00ED2F91 /* Location.swift */; };
+		0385C02A256B801A00ED2F91 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0385C029256B801A00ED2F91 /* README.md */; };
+		03C34B4D256D98FA0095FFBB /* RLDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C34B4C256D98FA0095FFBB /* RLDetailData.swift */; };
+		03C34B58256DA5010095FFBB /* RequestsDataSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C34B57256DA5010095FFBB /* RequestsDataSamples.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03002505256DBBA3001E793E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		031F52B7256C9CBF001BA0B4 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		0333E9E0256822A900F83229 /* Felipe's Cart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Felipe's Cart.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0333E9E3256822A900F83229 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0333E9E5256822A900F83229 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +70,20 @@
 		0333EA01256822AB00F83229 /* Felipe's CartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Felipe's CartUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0333EA05256822AB00F83229 /* Felipe_s_CartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Felipe_s_CartUITests.swift; sourceTree = "<group>"; };
 		0333EA07256822AB00F83229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0341B5E92568261900B50558 /* RSRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSRequest.swift; sourceTree = "<group>"; };
+		0341B5F025682B3C00B50558 /* ListScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenController.swift; sourceTree = "<group>"; };
+		0341B5F825682CA200B50558 /* RSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSService.swift; sourceTree = "<group>"; };
+		0341B5FF256A14F100B50558 /* DetailsScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenController.swift; sourceTree = "<group>"; };
+		0341B607256A168000B50558 /* DetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreen.swift; sourceTree = "<group>"; };
+		0341B60D256A1CE000B50558 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
+		0341B616256A22EC00B50558 /* DataRequestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequestStatus.swift; sourceTree = "<group>"; };
+		0341B61E256A253500B50558 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		0341B624256A285E00B50558 /* MoyaErrorToCustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaErrorToCustomError.swift; sourceTree = "<group>"; };
+		0385C013256B1AC100ED2F91 /* RSListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSListData.swift; sourceTree = "<group>"; };
+		0385C018256B1D2A00ED2F91 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		0385C029256B801A00ED2F91 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		03C34B4C256D98FA0095FFBB /* RLDetailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLDetailData.swift; sourceTree = "<group>"; };
+		03C34B57256DA5010095FFBB /* RequestsDataSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsDataSamples.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +91,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0341B5DE256825AB00B50558 /* RxMoya in Frameworks */,
+				0341B5DA256825AB00B50558 /* Moya in Frameworks */,
+				0341B5DC256825AB00B50558 /* ReactiveMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +117,7 @@
 		0333E9D7256822A900F83229 = {
 			isa = PBXGroup;
 			children = (
+				0385C029256B801A00ED2F91 /* README.md */,
 				0333E9E2256822A900F83229 /* Felipe's Cart */,
 				0333E9F9256822AB00F83229 /* Felipe's CartTests */,
 				0333EA04256822AB00F83229 /* Felipe's CartUITests */,
@@ -99,6 +138,11 @@
 		0333E9E2256822A900F83229 /* Felipe's Cart */ = {
 			isa = PBXGroup;
 			children = (
+				0385C004256B0ED300ED2F91 /* Models */,
+				0341B623256A284C00B50558 /* Utils */,
+				0341B615256A22CC00B50558 /* Enums */,
+				0341B5EE25682B1900B50558 /* Views */,
+				0341B5E2256825D500B50558 /* Services */,
 				0333E9E3256822A900F83229 /* AppDelegate.swift */,
 				0333E9E5256822A900F83229 /* SceneDelegate.swift */,
 				0333E9E7256822A900F83229 /* ContentView.swift */,
@@ -136,6 +180,80 @@
 			path = "Felipe's CartUITests";
 			sourceTree = "<group>";
 		};
+		0341B5E2256825D500B50558 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				03C34B57256DA5010095FFBB /* RequestsDataSamples.swift */,
+				0341B5E92568261900B50558 /* RSRequest.swift */,
+				0341B5F825682CA200B50558 /* RSService.swift */,
+				031F52B7256C9CBF001BA0B4 /* Storage.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0341B5EE25682B1900B50558 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0341B60C256A1CCB00B50558 /* Common */,
+				0341B5FE256A14DB00B50558 /* Details Screen */,
+				0341B5EF25682B2100B50558 /* List Screen */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0341B5EF25682B2100B50558 /* List Screen */ = {
+			isa = PBXGroup;
+			children = (
+				0341B5F025682B3C00B50558 /* ListScreenController.swift */,
+			);
+			path = "List Screen";
+			sourceTree = "<group>";
+		};
+		0341B5FE256A14DB00B50558 /* Details Screen */ = {
+			isa = PBXGroup;
+			children = (
+				0341B5FF256A14F100B50558 /* DetailsScreenController.swift */,
+				0341B607256A168000B50558 /* DetailsScreen.swift */,
+			);
+			path = "Details Screen";
+			sourceTree = "<group>";
+		};
+		0341B60C256A1CCB00B50558 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0341B60D256A1CE000B50558 /* LazyView.swift */,
+				03002505256DBBA3001E793E /* SearchBar.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		0341B615256A22CC00B50558 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				0341B616256A22EC00B50558 /* DataRequestStatus.swift */,
+				0341B61E256A253500B50558 /* Errors.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		0341B623256A284C00B50558 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0341B624256A285E00B50558 /* MoyaErrorToCustomError.swift */,
+				0385C018256B1D2A00ED2F91 /* Location.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		0385C004256B0ED300ED2F91 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0385C013256B1AC100ED2F91 /* RSListData.swift */,
+				03C34B4C256D98FA0095FFBB /* RLDetailData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -152,6 +270,11 @@
 			dependencies = (
 			);
 			name = "Felipe's Cart";
+			packageProductDependencies = (
+				0341B5D9256825AB00B50558 /* Moya */,
+				0341B5DB256825AB00B50558 /* ReactiveMoya */,
+				0341B5DD256825AB00B50558 /* RxMoya */,
+			);
 			productName = "Felipe's Cart";
 			productReference = 0333E9E0256822A900F83229 /* Felipe's Cart.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +346,9 @@
 				Base,
 			);
 			mainGroup = 0333E9D7256822A900F83229;
+			packageReferences = (
+				0341B5D8256825AB00B50558 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = 0333E9E1256822A900F83229 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -241,6 +367,7 @@
 			files = (
 				0333E9F0256822AB00F83229 /* LaunchScreen.storyboard in Resources */,
 				0333E9ED256822AB00F83229 /* Preview Assets.xcassets in Resources */,
+				0385C02A256B801A00ED2F91 /* README.md in Resources */,
 				0333E9EA256822AB00F83229 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,8 +394,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				0333E9E4256822A900F83229 /* AppDelegate.swift in Sources */,
+				0341B5F125682B3C00B50558 /* ListScreenController.swift in Sources */,
+				0341B600256A14F100B50558 /* DetailsScreenController.swift in Sources */,
+				03C34B58256DA5010095FFBB /* RequestsDataSamples.swift in Sources */,
 				0333E9E6256822A900F83229 /* SceneDelegate.swift in Sources */,
+				03002506256DBBA3001E793E /* SearchBar.swift in Sources */,
+				0341B608256A168000B50558 /* DetailsScreen.swift in Sources */,
+				0341B617256A22EC00B50558 /* DataRequestStatus.swift in Sources */,
+				0385C019256B1D2A00ED2F91 /* Location.swift in Sources */,
 				0333E9E8256822A900F83229 /* ContentView.swift in Sources */,
+				03C34B4D256D98FA0095FFBB /* RLDetailData.swift in Sources */,
+				031F52B8256C9CBF001BA0B4 /* Storage.swift in Sources */,
+				0385C014256B1AC100ED2F91 /* RSListData.swift in Sources */,
+				0341B625256A285E00B50558 /* MoyaErrorToCustomError.swift in Sources */,
+				0341B61F256A253500B50558 /* Errors.swift in Sources */,
+				0341B60E256A1CE000B50558 /* LazyView.swift in Sources */,
+				0341B5EA2568261900B50558 /* RSRequest.swift in Sources */,
+				0341B5F925682CA200B50558 /* RSService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +739,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0341B5D8256825AB00B50558 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0341B5D9256825AB00B50558 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0341B5D8256825AB00B50558 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		0341B5DB256825AB00B50558 /* ReactiveMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0341B5D8256825AB00B50558 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = ReactiveMoya;
+		};
+		0341B5DD256825AB00B50558 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0341B5D8256825AB00B50558 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0333E9D8256822A900F83229 /* Project object */;
 }
