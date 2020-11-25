@@ -24,64 +24,89 @@ struct ContentView: View {
    
    var body: some View {
       NavigationView {
-         List {
-            Section (header: header) {
-            
-            switch controller.dataStatus {
-               case DataRequestStatus.notYetRequested:
-                  Text("Digita alguma coisa")
-               case DataRequestStatus.done:
-                  if controller.unhiddenItems.count > 0 {
-                     itemsListView
-                  }
-                  else {
-                     Text("Tem nada")
-                  }
-               case .waiting:
-                  if controller.unhiddenItems.count > 0 {
-                     itemsListView
-                        .frame(maxWidth: .infinity)
-                  }
-                  else {
-                     loadingView
-                  }
-               case DataRequestStatus.error:
-                  Text("Eita deu erro")
+         VStack (spacing: 0) {
+            VStack (spacing: 0) {
+               SearchBar(label: "Procurar", text: $controller.searchedText)
+                  .padding(.horizontal, 5)
+               Divider()
             }
+            .background(
+               Rectangle()
+                  .foregroundColor(.white)
+                  .shadow(color: Color(UIColor.black.withAlphaComponent(0.075)), radius: 6, x: 0, y: 0)
+            )
+            .padding(.bottom)
             
-            
-            bottomListView
+            ScrollView {
+               LazyVStack {
+                  switch controller.dataStatus {
+                     case DataRequestStatus.notYetRequested:
+                        Text("Digita alguma coisa")
+                     case DataRequestStatus.done:
+                        if controller.unhiddenItems.count > 0 {
+                           itemsListView
+                        }
+                        else {
+                           Text("Tem nada")
+                        }
+                     case .waiting:
+                        if controller.unhiddenItems.count > 0 {
+                           itemsListView
+                              .frame(maxWidth: .infinity)
+                        }
+                        else {
+                           loadingView
+                        }
+                     case DataRequestStatus.error:
+                        Text("Eita deu erro")
+                  }
+               }
             }
+            .background(Color(.blue))
+            .listStyle(PlainListStyle())
+            .frame(maxWidth: .infinity)
+            .navigationBarTitleDisplayMode(.inline)
+            //.navigationTitle(Text("Restaurant RockSpoon"))
+            .toolbar {
+               ToolbarItem (placement: .navigationBarLeading) {
+                  Text("Restaurant RockSpoon")
+                     .font(.title3)
+                     .padding(.top)
+               }
+            }
+            .animation(.easeIn)
          }
-//         .listStyle(PlainListStyle())
-         .frame(maxWidth: .infinity)
-         //.navigationBarTitleDisplayMode(.inline)
-         .navigationTitle(Text("Restaurant RockSpoon"))
-         //            .toolbar {
-         //               ToolbarItem (placement: .navigationBarLeading) {
-         //                  Text("Restaurant RockSpoon")
-         //                     .font(.title3)
-         //                     .padding(.top)
-         //               }
-         //            }
-         .animation(.easeIn)
+         
       }
    }
    
    var itemsListView: some View {
       ForEach(controller.unhiddenItems, id: \.id) { item in
          NavigationLink(destination: controller.getDetailsScreen(item: item)) {
-            VStack (alignment: .leading) {
-               Text(item.name)
-                  .font(.headline)
-               
-               Text(item.restaurantName)
-                  .font(.subheadline)
-               
-               Text("\(item.rating)")
-                  .font(.caption)
+            HStack {
+               VStack (alignment: .leading) {
+                  Text(item.name)
+                     .font(.headline)
+                  
+                  Text(item.restaurantName)
+                     .font(.subheadline)
+                  
+                  Text("\(item.rating)")
+                     .font(.caption)
+               }
+               .padding()
             }
-            .padding()
+            Spacer()
+         }
+         .accentColor(.black)
+         
+         // If this item is the last, in the it appears it should call for more
+         .onAppear() {
+            if item.id == controller.unhiddenItems.last?.id {
+               withAnimation {
+                  controller.loadNextPage()
+               }
+            }
          }
       }
       .onDelete { indexSet in
@@ -90,41 +115,7 @@ struct ContentView: View {
          }
       }
       .frame(maxWidth: .infinity)
-   }
-   
-   var header: some View {
-      VStack (spacing: 0) {
-         SearchBar(label: "Procurar", text: $controller.searchedText)
-            .padding(.horizontal, 5)
-         Divider()
-      }
-      .background(
-         Rectangle()
-            .foregroundColor(.white)
-            .shadow(color: Color(UIColor.black.withAlphaComponent(0.075)), radius: 6, x: 0, y: 0)
-      )
-      .padding(.bottom)
-      .listRowInsets(EdgeInsets())
-   }
-   
-   /// To be appended at the end of the scroll view.
-   /// Under the right conditions, trigger `loadNextPage` on appear
-   var bottomListView: some View {
-      VStack {
-         switch controller.dataStatus {
-            case .waiting:
-               loadingView
-            case .done:
-               Rectangle()
-                  .onAppear {
-                     withAnimation {
-                        controller.loadNextPage()
-                     }
-                  }
-            default:
-               Rectangle()
-         }
-      }
+      .background(Color(.white))
    }
    
    var loadingView: some View {
