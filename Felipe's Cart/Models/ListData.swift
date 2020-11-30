@@ -8,15 +8,16 @@
 import Foundation
 
 // No need to use Codable, since I'm not sending data
-class RSListData: Decodable {
+class RDListData: Decodable {
    let page: Int
    let hasNextPage: Bool
-   let items: [RSListItem]
+   let items: [ListItem]
    
    enum CodingKeys: String, CodingKey {
       case page
       case hasNextPage = "hasNext"
       case results
+      //case items
    }
    
    enum NestedInfo: String, CodingKey {
@@ -29,21 +30,19 @@ class RSListData: Decodable {
       hasNextPage = try values.decode(Bool.self, forKey: .hasNextPage)
       
       let results = try values.nestedContainer(keyedBy: NestedInfo.self, forKey: .results)
-      items = try results.decode([RSListItem].self, forKey: .items)
+      items = try results.decode([ListItem].self, forKey: .items)
    }
 }
 
-class RSListItem: Codable, Identifiable {
+class ListItem: Codable {
    let id: String
    let name: String
    let restaurantName: String
    let location: Location
-   let prices: [RSPrice]
+   let prices: [Price]
    let rating: Double
    let tags: [String]
    let image: String?
-   let description: String?
-   let availableFor: [RSAvailableFor]
    
    enum CodingKeys: String, CodingKey {
       case id
@@ -54,8 +53,6 @@ class RSListItem: Codable, Identifiable {
       case rating
       case tags
       case image = "photo"
-      case description
-      case availableFor
    }
    
    required init(from decoder: Decoder) throws {
@@ -64,35 +61,23 @@ class RSListItem: Codable, Identifiable {
       name = try values.decode(String.self, forKey: .name)
       restaurantName = try values.decode(String.self, forKey: .restaurantName)
       location = try values.decode(Location.self, forKey: .location)
-      prices = try values.decodeIfPresent([RSPrice].self, forKey: .prices) ?? []
+      prices = try values.decode([Price].self, forKey: .prices)
       rating = try values.decode(Double.self, forKey: .rating)
+      tags = try values.decodeIfPresent([String].self, forKey: .tags) ?? []
       image = try values.decodeIfPresent(String.self, forKey: .image)
-      description = try values.decodeIfPresent(String.self, forKey: .description)
-      availableFor = ((try? values.decodeIfPresent([RSAvailableFor].self, forKey: .availableFor) ?? []) ?? [])
-         .sorted { (a, b) -> Bool in
-            a.readable.lowercased() < b.readable.lowercased()
-         }
-      
-      let _tags = try values.decodeIfPresent([Dictionary<String, String>].self, forKey: .tags) ?? []
-      if _tags.isEmpty {
-         tags = []
-      }
-      else {
-         tags = _tags.map({$0["name"]!})
-      }
    }
 }
 
 // Amount was aways equal to value, so I'll not complicate things without reason
-class RSPrice: Codable {
+class Price: Codable {
    let amount: Int
-   let currency: RSCurrency
+   let currency: Currency
 }
 
-struct RSCurrency: Codable {
+struct Currency: Codable {
    let decimalDigits: Int
-   let symbol: RSCurrencySymbol
-   let type: RSCurrencyType
+   let symbol: CurrencySymbol
+   let type: CurrencyType
    
    enum CodingKeys: String, CodingKey {
       case decimalDigits = "decimal"
@@ -104,24 +89,24 @@ struct RSCurrency: Codable {
    init(from decoder: Decoder) throws {
       let values = try decoder.container(keyedBy: CodingKeys.self)
       decimalDigits = try values.decodeIfPresent(Int.self, forKey: .decimalDigits) ?? 2
-      symbol = try values.decodeIfPresent(RSCurrencySymbol.self, forKey: .symbol) ?? .dollar
-      type = try values.decodeIfPresent(RSCurrencyType.self, forKey: .type) ?? .usd
+      symbol = try values.decodeIfPresent(CurrencySymbol.self, forKey: .symbol) ?? .dollar
+      type = try values.decodeIfPresent(CurrencyType.self, forKey: .type) ?? .usd
    }
 }
 
-enum RSCurrencySymbol: String, Codable {
+enum CurrencySymbol: String, Codable {
    case dollar = "$"
 }
 
-enum RSCurrencyType: String, Codable {
+enum CurrencyType: String, Codable {
    case usd = "USD"
 }
 
-enum RSAvailableFor: String, Codable, Identifiable {   
+enum AvailableFor: String, Codable {
    case catering = "catering"
    case curbside = "curbside"
    case delivery = "delivery"
-   case dinein   = "dine-in"
+   case dinein   = "dinein"
    case takeout  = "takeout"
    
    var readable: String {
@@ -138,6 +123,4 @@ enum RSAvailableFor: String, Codable, Identifiable {
             return "Takeout"
       }
    }
-   
-   var id: String { rawValue }
 }

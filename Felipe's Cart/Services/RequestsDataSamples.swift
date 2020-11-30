@@ -46,8 +46,14 @@ class RSDataSamples {
                         "name": "food>"
                     },
                     {
+                        "name": "food>ABCD"
+                    },
+                    {
+                        "name": "food>Vegetarian"
+                    },
+                    {
                         "name": "item>Vegetarian Breakfast"
-                    }
+                    },
                 ],
                 "venueId": "5d1f43d60314640d77cfdb46"
             }

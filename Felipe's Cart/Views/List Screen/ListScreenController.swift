@@ -92,7 +92,8 @@ class ListScreenController: ObservableObject, Identifiable {
                self.currentPage = result.page
                self.hasNextPage = result.hasNextPage
                
-            case .failure(_):
+            case .failure(let error):
+               print(error)
                self.dataStatus = .error
                self.data = []
          }
@@ -125,5 +126,21 @@ class ListScreenController: ObservableObject, Identifiable {
    
    // MARK: - VIEW DATA
    
-
+   func pricesText(for item: RSListItem) -> String {
+      if item.prices.count == 0 {
+         return ""
+      }
+      else if item.prices.count == 1 {
+         let currency = item.prices.first!.currency.symbol.rawValue
+         let price = Double(item.prices.first!.amount / 100).string(fractionDigits: 2)
+         
+         return currency + price
+      }
+      else {
+         let currency = item.prices.first!.currency.symbol.rawValue
+         let price = Double(item.prices.first!.amount / 100).string(fractionDigits: 2)
+         
+         return "from" + currency + price
+      }
+   }
 }

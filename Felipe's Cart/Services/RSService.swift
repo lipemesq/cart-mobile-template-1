@@ -40,6 +40,7 @@ class DefaultRSService : RSService {
                   let data = try JSONDecoder().decode(RSListData.self, from: response.data)
                   completion(.success(data))
                } catch {
+                  print(error)
                   completion(.failure(.internalError))
                }
             case .failure(let error):
