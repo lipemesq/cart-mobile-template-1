@@ -28,11 +28,30 @@ struct _DetailsScreen: View {
       GridItem(.fixed(30)),
    ]
    
+   init(controller: DetailsScreenController) {
+      self.controller = controller
+      controller.start()
+   }
+   
    var body: some View {
       let pricesText = controller.pricesText()
-            
-      List {
+      
+      return List {
+         if let image = controller.item.image {
+            Section(
+               header: CachedImageView(urlString: image)
+                  .aspectRatio(contentMode: .fill)
+                  .frame(height: 200)
+                  .clipped()
+                  .listRowInsets(EdgeInsets())
+                  .ignoresSafeArea()
+            ) {
+               EmptyView()
+            }
+         }
+         
          VStack (alignment: .leading, spacing: 0) {
+            
             Text(controller.item.name)
                .styleTitle()
                .padding(.bottom, 8)
@@ -47,25 +66,21 @@ struct _DetailsScreen: View {
                   .padding(.bottom, 8)
             }
          }
+         .padding(.top, 8)
          
          tagsList
          
-         availabilitySection
-         
-         Section(header: locationHeader) {
-            VStack(alignment: .leading, spacing: 0) {
-               Text(controller.item.restaurantName)
-                  .styleBody1()
-                  .padding(.bottom, 4)
-               
-               Text(controller.locationName)
-                  .styleFootnote()
-                  .lineLimit(2)
-            }
-            .padding(.vertical, 8)
+         if controller.dataStatus == .done && controller.data != nil {
+            sizesSection
          }
-         .textCase(nil)
+         
+         if controller.item.availableFor.count > 0 {
+            availabilitySection
+         }
+         
+         locationSection
       }
+      .navigationBarTitleDisplayMode(.inline)
    }
    
    var tagsList: some View {
@@ -96,7 +111,22 @@ struct _DetailsScreen: View {
             .styleSection()
             .padding(.bottom, 4)
       }
-      .frame(height: 60)
+      .frame(height: 56)
+   }
+   
+   var sizesSection: some View {
+      Section(header: sizesHeader) {
+         ForEach(controller.data!.sizesAndPrices, id: \.id) { sap in
+            HStack(spacing: 0) {
+               Text(sap.sizeName)
+                  .styleBody1()
+               Spacer()
+               Text(controller.priceText(for: sap.price))
+                  .styleBody1()
+            }
+         }
+      }
+      .textCase(nil)
    }
    
    var availabilityHeader: some View {
@@ -106,13 +136,13 @@ struct _DetailsScreen: View {
             .styleSection()
             .padding(.bottom, 4)
       }
-      .frame(height: 60)
+      .frame(height: 56)
    }
    
    var availabilitySection: some View {
       let availablesFirstHalf = Int((Double(controller.item.availableFor.count) / 2.0).rounded(.up))
       let availablesLastHalf = controller.item.availableFor.count - availablesFirstHalf
-
+      
       return Section(header: availabilityHeader) {
          HStack (alignment: .top, spacing: 0) {
             VStack(alignment: .leading, spacing: 8) {
@@ -165,10 +195,28 @@ struct _DetailsScreen: View {
             .styleSection()
             .padding(.bottom, 4)
       }
-      .frame(height: 60)
+      .frame(height: 56)
+   }
+   
+   var locationSection: some View {
+      Section(header: locationHeader) {
+         VStack(alignment: .leading, spacing: 0) {
+            Text(controller.item.restaurantName)
+               .styleBody1()
+               .padding(.bottom, 4)
+            
+            Text(controller.locationName)
+               .styleFootnote()
+               .lineLimit(2)
+         }
+         .padding(.vertical, 8)
+      }
+      .textCase(nil)
    }
 }
 
+
+// item used for preview
 let testItem = try! JSONDecoder().decode([RSListItem].self, from: Data(RSDataSamples.listData.utf8)).first!
 
 struct DetailsScreen_Previews: PreviewProvider {

@@ -20,7 +20,7 @@ struct CachedImageView: View {
       if controller.dataStatus == .done {
          Image(uiImage: controller.image ?? CachedImageView.placeholderImage)
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
       }
       else if controller.dataStatus == .waiting {
          ProgressView()
@@ -28,12 +28,12 @@ struct CachedImageView: View {
       else if controller.dataStatus == .error {
          Image(uiImage: CachedImageView.errorImage)
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
       }
       else {
          Image(uiImage: CachedImageView.placeholderImage)
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
       }
       
 //      Image(uiImage: controller.image ?? CachedImageView.errorImage)

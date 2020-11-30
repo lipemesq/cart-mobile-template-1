@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "error,404,404 page,page not found,warning,exclamation,development error,issue,error in website,webpage not found,web app,website,landing page,landing page illustration,web,webpage,static page,free illustrations,freebies,1768082.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

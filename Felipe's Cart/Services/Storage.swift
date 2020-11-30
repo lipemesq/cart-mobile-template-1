@@ -15,7 +15,7 @@ protocol RSStorage {
 class DefaultRSStorage: RSStorage {
    private let defaults = UserDefaults.standard
    
-   let hiddenItemsTag = "hidden_1"
+   let hiddenItemsTag = "hidden_3"
 
    func saveHiddenItemsIDs(ids: [String]) {
       defaults.setValue(ids, forKey: hiddenItemsTag)

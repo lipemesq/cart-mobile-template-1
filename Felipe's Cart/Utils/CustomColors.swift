@@ -10,4 +10,5 @@ import SwiftUI
 class CustomColors {
    static let labelBlack = Color.black
    static let labelGrey = Color(hex: "636366")
+   static let red = Color(hex: "E63B26")
 }

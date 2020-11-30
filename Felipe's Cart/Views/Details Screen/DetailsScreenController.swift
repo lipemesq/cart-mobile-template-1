@@ -20,6 +20,11 @@ class DetailsScreenController: ObservableObject, Identifiable {
    // the item's id
    let item: RSListItem
    
+   // the data frmo http
+   @Published var data: RSDetailData?
+   
+   @Published var dataStatus: DataRequestStatus = .notYetRequested
+   
    @Published var locationName: String = ""
    
    // MARK: - INIT
@@ -27,7 +32,10 @@ class DetailsScreenController: ObservableObject, Identifiable {
    init(item: RSListItem, rsService: RSService) {
       self.item = item
       self.service = rsService
-      
+   }
+   
+   func start() {
+      updateData()
       getPlace()
    }
    
@@ -35,14 +43,16 @@ class DetailsScreenController: ObservableObject, Identifiable {
    // MARK: - MAGIC
    
    func updateData() {
-      //      service.fetchDetails(for: id) { (response) in
-      //         switch response {
-      //            case .success(let result):
-      //               self.data = result
-      //            case .failure(_):
-      //               self.data = ""
-      //         }
-      //      }
+      dataStatus = .waiting
+      service.fetchDetails(for: item.id) { (response) in
+         switch response {
+            case .success(let result):
+               self.data = result
+               self.dataStatus = .done
+            case .failure(_):
+               self.dataStatus = .error
+         }
+      }
    }
    
    func getPlace() {
@@ -97,8 +107,15 @@ class DetailsScreenController: ObservableObject, Identifiable {
          let currency = item.prices.first!.currency.symbol.rawValue
          let price = Double(item.prices.first!.amount / 100).string(fractionDigits: 2)
          
-         return "from" + currency + price
+         return "from " + currency + price
       }
+   }
+   
+   func priceText(for amount: Double) -> String {
+      let currency = item.prices.first!.currency.symbol.rawValue
+      let price = (amount / 100).string(fractionDigits: 2)
+      
+      return currency + price
    }
    
    func getTags() -> [String] {

@@ -11,7 +11,7 @@ import SwiftUI
 
 protocol RSService {
    func fetchList(with text: String, page: Int, completion: @escaping (Result<RSListData, CustomError>) -> Void)
-   func fetchDetails(for id: String, completion: @escaping (Result<String, CustomError>) -> Void)
+   func fetchDetails(for id: String, completion: @escaping (Result<RSDetailData, CustomError>) -> Void)
 }
 
 // MARK: - DEFAULT IMPLEMENTATION
@@ -51,7 +51,7 @@ class DefaultRSService : RSService {
       }
    }
    
-   func fetchDetails(for id: String, completion: @escaping (Result<String, CustomError>) -> Void) {
+   func fetchDetails(for id: String, completion: @escaping (Result<RSDetailData, CustomError>) -> Void) {
       
       // Cancel the current request
       if let currentSub = detailSubscription {
@@ -63,7 +63,13 @@ class DefaultRSService : RSService {
       detailSubscription = provider.request(.details(id: id)) { (response) in
          switch response {
             case .success(let response):
-               completion(.success(response.data.description))
+               do {
+                  let data = try JSONDecoder().decode(RSDetailData.self, from: response.data)
+                  completion(.success(data))
+               } catch {
+                  print(error)
+                  completion(.failure(.internalError))
+               }
             case .failure(let error):
                print(error)
                // omg, I'm so proud of this thing *-*

@@ -28,8 +28,12 @@ class RSListData: Decodable {
       page = try values.decode(Int.self, forKey: .page)
       hasNextPage = try values.decode(Bool.self, forKey: .hasNextPage)
       
-      let results = try values.nestedContainer(keyedBy: NestedInfo.self, forKey: .results)
-      items = try results.decode([RSListItem].self, forKey: .items)
+      let results = try? values.nestedContainer(keyedBy: NestedInfo.self, forKey: .results)
+      guard results != nil else {
+         items = []
+         return
+      }
+      items = try results!.decode([RSListItem].self, forKey: .items)
    }
 }
 

@@ -32,6 +32,7 @@ class ListScreenController: ObservableObject, Identifiable {
    
    @Published var hasNextPage: Bool = false
    
+   @Published var myError: CustomError = CustomError.unknownError
    
    // for delay in the requests
    private let scheduler: DispatchQueue = DispatchQueue(label: "ListScreenSearchScheduler")
@@ -47,32 +48,45 @@ class ListScreenController: ObservableObject, Identifiable {
       
       hiddenItems = storage.fetchHiddenItemsIDs()
       
+      /// Removed due a bug in swiftUI async operations :(
+      /// now done manually
+//      $data
+//         .dropFirst(1)
+//         .sink() { items in
+//            // This should be done from the main queue, not from background
+//            // (I didn't know that, but adorable xcode taught me)
+//            DispatchQueue.main.async {
+//               self.unhiddenItems = items.filter({ !self.hiddenItems.contains($0.id) })
+//            }
+//         }
+//         .store(in: &observers)
+      
       // do things on every input's change
       $searchedText
          .dropFirst(1) // ignore the OnAppear call
          .debounce(for: .seconds(0.5), scheduler: scheduler)
-         .sink() { [self] (text) in
-            
-            // This should be done from the main queue, not from background
-            // (I didn't know that, but adorable xcode taught me)
-            DispatchQueue.main.async {
-               self.dataStatus = .waiting
+         .sink() { (text) in
+            if text.isEmpty {
+               DispatchQueue.main.async {
+                  self.dataStatus = .notYetRequested
+                  self.data = []
+               }
             }
-            fetchData(text: text, page: 1)
+            else {
+               self.fetchData(text: text, page: 1)
+           }
          }
          .store(in: &observers) // prevent being erased after finishing this init
       
-      $data
-         .sink() { items in
-            self.unhiddenItems = items.filter({ !self.hiddenItems.contains($0.id) })
-         }
-         .store(in: &observers)
-      
-      $hiddenItems
-         .sink() { ids in
-            self.unhiddenItems = self.data.filter({ !ids.contains($0.id) })
-         }
-         .store(in: &observers)
+      /// Also removed due a bug in swiftUI async operations :(
+      /// now done manually
+//      $hiddenItems
+//         .sink() { ids in
+//            DispatchQueue.main.async {
+//               self.unhiddenItems = self.data.filter({ !ids.contains($0.id) })
+//            }
+//         }
+//         .store(in: &observers)
    }
    
    
@@ -80,21 +94,32 @@ class ListScreenController: ObservableObject, Identifiable {
    
    /// Make the fetch call
    func fetchData(text: String, page: Int) {
+      DispatchQueue.main.async {
+         self.dataStatus = .waiting
+      }
+
       service.fetchList(with: text, page: page) { (response) in
          switch response {
             case .success(let result):
-               // On first page need to reset the current data
-               if result.page == 1 {
-                  self.data = []
-               }
-               self.dataStatus = .done
-               self.data.append(contentsOf: result.items)
                self.currentPage = result.page
                self.hasNextPage = result.hasNextPage
+               
+               // On first page need to reset the current data
+               if result.page == 1 {
+                  self.data = result.items
+               }
+               else {
+                  self.data.append(contentsOf: result.items)
+               }
+               self.unhiddenItems = self.data.filter({ !self.hiddenItems.contains($0.id) })
+
+               self.dataStatus = .done
+               print(self.data)
                
             case .failure(let error):
                print(error)
                self.dataStatus = .error
+               self.myError = error
                self.data = []
          }
       }
@@ -112,6 +137,8 @@ class ListScreenController: ObservableObject, Identifiable {
    func hideItem(at offsets: IndexSet) {
       //data.remove(atOffsets: offsets)
       hiddenItems.append(unhiddenItems[offsets.first!].id)
+      self.unhiddenItems = self.data.filter({ !self.hiddenItems.contains($0.id) })
+
       storage.saveHiddenItemsIDs(ids: hiddenItems)
    }
    
@@ -140,7 +167,7 @@ class ListScreenController: ObservableObject, Identifiable {
          let currency = item.prices.first!.currency.symbol.rawValue
          let price = Double(item.prices.first!.amount / 100).string(fractionDigits: 2)
          
-         return "from" + currency + price
+         return "from " + currency + price
       }
    }
 }

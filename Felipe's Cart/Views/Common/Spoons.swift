@@ -9,25 +9,29 @@ import SwiftUI
 
 struct Spoons: View {
    let spoons: Int
+   let aspectRatio : CGFloat = 82/170
    
    var body: some View {
       HStack (spacing: 5) {
          ForEach(0..<spoons) { i in
-            Rectangle()
-               .fill(Color(.yellow))
-               .frame(width: 15, height: 15)
+            Image("spoon")
+               .resizable()
+               .aspectRatio(aspectRatio, contentMode: .fit)
+               .foregroundColor(CustomColors.red)
          }
          ForEach(spoons..<5) { i in
-            Rectangle()
-               .fill(Color(.gray))
-               .frame(width: 15, height: 15)
+            Image("spoon")
+               .resizable()
+               .aspectRatio(aspectRatio, contentMode: .fit)
+               .foregroundColor(CustomColors.labelGrey)
          }
       }
+      .frame(height: 15)
    }
 }
 
 struct Spoons_Previews: PreviewProvider {
    static var previews: some View {
-      Spoons(spoons: 5)
+      Spoons(spoons: 3)
    }
 }

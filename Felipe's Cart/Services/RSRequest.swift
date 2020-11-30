@@ -39,7 +39,10 @@ extension RSRequest: TargetType {
    }
    
    public var sampleData: Data {
-      return Data()
+      switch self {
+         case .list: return Data(RSDataSamples.listData.utf8)
+         case .details: return Data(RSDataSamples.detailData.utf8)
+      }
    }
    
    public var task: Task {
