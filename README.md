@@ -1,6 +1,8 @@
 
 Hi! Welcome to paradise-where-Felipe-explains-everything!
 
+>> this project was done in just a few days as part of a selection process. To be honest, more than half the time spent was creating the design on Figma, solving SwiftUI bugs and getting irritate with the API results.
+
 Well, the first and most shocking topic is that I've chosen to do this in swiftUI because (I am a masochist) I saw it as an excuse to train and learn and pratice it. I could easily get to the same app with UIKit, if that worries you in any way (and it would be less painful).
 
 I was really annoyed with the data on the server. You (yes, you, who are reading this right now) could have arranged the data for me :( . As the data was a mess I used the "Decodable" protocol to do everything manually and only use whatever was minimally necessary (this implies that on the item's screen I make a request to get a single blessed parameter, what a nastiness)
